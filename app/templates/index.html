@@ -12,22 +12,20 @@
 <div class="container">
     <div class="row justify-content-start">
         <div class="col">
-            <h2>To Do List</h2>
+            <h2><strong>To-Do List</strong></h2>
+            <br>
         </div>
     </div>
 
     <form action="/add" method="POST">
         <div class="row align-items-center">
-            <div class="col-1">
-                <label for="title" class="form-label">Add new task: </label>
-            </div>
-            <div class="col-4">
-                <input type="text" name="title" class="form-control" placeholder="Enter new task">
+            <div class="col-6">
+                <input type="text" name="title" class="form-control" placeholder="Enter a new task">
             </div>
             <div class="col-1">
                 <button type="submit" class="btn btn-primary">Add</button>
             </div>
-            <div class="col-6"></div>
+            <div class="col-5"></div>
         </div>
     </form>
 
@@ -40,7 +38,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Task</th>
+                    <th scope="col">Tasks this week</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -65,6 +63,7 @@
 
                     <td>
                         <a href="/update/{{ todo.id_task }}" class="btn btn-primary">Done?</a>
+                        <a href="/move/{{ todo.id_task }}" class="btn btn-warning">Move</a>
                         <a href="/delete/{{ todo.id_task }}" class="btn btn-danger">Delete</a>
                     </td>
 
@@ -77,6 +76,39 @@
             </table>
         </div>
     </div>
+
+    <br>
+
+    <div class="row justify-content-center">
+        <div class="col">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tasks next week</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for todo in next_week %}
+
+                <tr>
+                    <th scope="row">{{ todo.id_task }}</th>
+
+                    <td>{{ todo.title }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 </div>
 
 </body>
