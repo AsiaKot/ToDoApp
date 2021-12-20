@@ -9,7 +9,9 @@ def index():
     todo_list = ToDo.query.all()
     this_week = ThisWeek.query.all()
     next_week = NextWeek.query.all()
-    return render_template("index.html", todo_list=todo_list, this_week=this_week, next_week=next_week)
+    return render_template(
+        "index.html", todo_list=todo_list, this_week=this_week, next_week=next_week
+    )
 
 
 @SERVER_BLUEPRINT.route("/add", methods=["POST"])
