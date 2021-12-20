@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for
 
 from app.db.models import ToDo, ThisWeek, NextWeek, DB
+from app.services.task_manger import filter_task, filter_tb
 from . import SERVER_BLUEPRINT
 
 
@@ -23,47 +24,28 @@ def add():
     return redirect(url_for(".index"))
 
 
-@SERVER_BLUEPRINT.route("/update/<int:todo_id_task>")
-def update(todo_id_task):
-    todo = ToDo.query.filter_by(id_task=todo_id_task).first()
+@SERVER_BLUEPRINT.route("/update/<class_name>/<int:todo_id_task>")
+def update(class_name, todo_id_task):
+    todo = filter_task(tb_key=class_name, todo_id_task=todo_id_task)
     todo.complete = not todo.complete
     DB.session.commit()
     return redirect(url_for(".index"))
 
 
-@SERVER_BLUEPRINT.route("/delete/<int:todo_id_task>")
-def delete(todo_id_task):
-    todo = ToDo.query.filter_by(id_task=todo_id_task).first()
+@SERVER_BLUEPRINT.route("/delete/<class_name>/<int:todo_id_task>")
+def delete(class_name, todo_id_task):
+    todo = filter_task(tb_key=class_name, todo_id_task=todo_id_task)
     DB.session.delete(todo)
     DB.session.commit()
     return redirect(url_for(".index"))
 
 
-@SERVER_BLUEPRINT.route("/move/<int:todo_id_task>")
-def move(todo_id_task):
-    todo = ToDo.query.filter_by(id_task=todo_id_task).first()
+@SERVER_BLUEPRINT.route("/<move_from>/<move_to>/<int:todo_id_task>")
+def move(move_from, move_to, todo_id_task):
+    todo = filter_task(tb_key=move_from, todo_id_task=todo_id_task)
     DB.session.delete(todo)
-    new_todo = ThisWeek(title=todo.title, complete=todo.complete)
+    new_todo = filter_tb(tb_key=move_to)(title=todo.title, complete=todo.complete)
     DB.session.add(new_todo)
     DB.session.commit()
     return redirect(url_for(".index"))
 
-
-@SERVER_BLUEPRINT.route("/next_week/<int:todo_id_task>")
-def move_to_next_week(todo_id_task):
-    todo = ThisWeek.query.filter_by(id_task=todo_id_task).first()
-    DB.session.delete(todo)
-    new_todo = NextWeek(title=todo.title, complete=todo.complete)
-    DB.session.add(new_todo)
-    DB.session.commit()
-    return redirect(url_for(".index"))
-
-
-@SERVER_BLUEPRINT.route("/previous_week/<int:todo_id_task>")
-def move_to_previous_week(todo_id_task):
-    todo = NextWeek.query.filter_by(id_task=todo_id_task).first()
-    DB.session.delete(todo)
-    new_todo = ThisWeek(title=todo.title, complete=todo.complete)
-    DB.session.add(new_todo)
-    DB.session.commit()
-    return redirect(url_for(".index"))
