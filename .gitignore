@@ -1,5 +1,0 @@
-__pycache__/
-.gitignore
-virtual_env/
-.idea/
-app/db.sqlite
