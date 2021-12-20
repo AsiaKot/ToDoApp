@@ -7,3 +7,5 @@ from random import sample
 class Config:
     DEBUG: bool = True
     SECRET_KEY: str = "".join(sample(ascii_letters, 10))
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///db.sqlite"
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False

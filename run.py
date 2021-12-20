@@ -1,10 +1,6 @@
-from app import create_app, create_db
+from app import create_app
 
-app = create_app()
-db = create_db(app)
+APP = create_app()
 
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
-
+if __name__ == "__main__":
+    APP.run(debug=True)
