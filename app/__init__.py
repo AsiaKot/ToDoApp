@@ -1,7 +1,6 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
-DB = SQLAlchemy()
+from app.db import DB
 
 
 def create_app() -> Flask:
@@ -12,6 +11,7 @@ def create_app() -> Flask:
 
     app.register_blueprint(SERVER_BLUEPRINT)
 
-    db = SQLAlchemy(app)
-    db.create_all()
+    DB.init_app(app)
+    with app.app_context():
+        DB.create_all()
     return app

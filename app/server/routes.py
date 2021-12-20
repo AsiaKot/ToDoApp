@@ -1,11 +1,7 @@
 from flask import render_template, request, redirect, url_for
 
-from app.db.models import ToDo, DB, NextWeek
+from app.db.models import ToDo, NextWeek, DB
 from . import SERVER_BLUEPRINT
-
-
-test = NextWeek(title="test", complete=False)
-DB.session.add(test)
 
 
 @SERVER_BLUEPRINT.route("/")
