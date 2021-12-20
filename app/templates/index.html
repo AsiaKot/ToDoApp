@@ -17,6 +17,7 @@
         </div>
     </div>
 
+    <!Adding new task!>
     <form action="/add" method="POST">
         <div class="row align-items-center">
             <div class="col-6">
@@ -31,14 +32,14 @@
 
     <br>
 
+    <!Tasks for today!>
     <div class="row justify-content-center">
         <div class="col">
 
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tasks this week</th>
+                    <th scope="col">Tasks to do today</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -48,7 +49,6 @@
                 {% for todo in todo_list %}
 
                 <tr>
-                    <th scope="row">{{ todo.id_task }}</th>
 
                     {% if todo.complete == False %}
                     <td>{{ todo.title }}</td>
@@ -62,8 +62,8 @@
                     {% endif %}
 
                     <td>
-                        <a href="/update/{{ todo.id_task }}" class="btn btn-primary">Done?</a>
-                        <a href="/move/{{ todo.id_task }}" class="btn btn-warning">Move</a>
+                        <a href="/update/{{ todo.id_task }}" class="btn btn-primary">Done!</a>
+                        <a href="/move/{{ todo.id_task }}" class="btn btn-warning">Later this week</a>
                         <a href="/delete/{{ todo.id_task }}" class="btn btn-danger">Delete</a>
                     </td>
 
@@ -79,14 +79,63 @@
 
     <br>
 
+    <!Tasks for this week!>
     <div class="row justify-content-center">
         <div class="col">
 
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tasks next week</th>
+                    <th scope="col">Tasks to do this week</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for todo in this_week %}
+
+                <tr>
+
+                    {% if todo.complete == False %}
+                    <td>{{ todo.title }}</td>
+                    <td><span class="badge bg-warning text-dark">Not Completed</span></td>
+
+                    {% else %}
+                    <td>
+                        <del>{{ todo.title }}</del>
+                    </td>
+                    <td><span class="badge bg-success">Completed</span></td>
+                    {% endif %}
+
+                    <td>
+                        <a href="/update/{{ todo.id_task }}" class="btn btn-primary">Done!</a>
+                        <a href="/next_week/{{ todo.id_task }}" class="btn btn-warning">Move to next week</a>
+                        <a href="/delete/{{ todo.id_task }}" class="btn btn-danger">Delete</a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+    <!Tasks for next week!>
+    <div class="row justify-content-center">
+        <div class="col">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Tasks to do next week</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -94,14 +143,27 @@
                 {% for todo in next_week %}
 
                 <tr>
-                    <th scope="row">{{ todo.id_task }}</th>
 
+                    {% if todo.complete == False %}
                     <td>{{ todo.title }}</td>
+                    <td><span class="badge bg-warning text-dark">Not Completed</span></td>
+
+                    {% else %}
+                    <td>
+                        <del>{{ todo.title }}</del>
+                    </td>
+                    <td><span class="badge bg-success">Completed</span></td>
+                    {% endif %}
+
+                    <td>
+                        <a href="/update/{{ todo.id_task }}" class="btn btn-primary">Done!</a>
+                        <a href="/previous_week/{{ todo.id_task }}" class="btn btn-warning">Move to previous week</a>
+                        <a href="/delete/{{ todo.id_task }}" class="btn btn-danger">Delete</a>
+                    </td>
 
                 </tr>
 
                 {% endfor %}
-
 
                 </tbody>
             </table>
