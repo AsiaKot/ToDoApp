@@ -33,7 +33,7 @@
 
     <br>
 
-    <!Tasks for today!>
+    <!Table: Tasks for today!>
     <div class="row justify-content-center">
         <div class="col">
 
@@ -49,24 +49,23 @@
                 <tbody>
                 {% for todo in todo_list %}
 
-                    <!Tasks for today!>
-                    {% if ((todo.when == 'Today') and (todo.complete == False)) %}
+                {% if todo.when == 'Today' %}
+                    {% if todo.complete == False %}
+
                         <tr class="table-warning">
+
                             <td>{{ todo.title }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
 
-                            <td>
-                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                                <a class="btn btn-primary" href="/move/ThisWeek/{{ todo.id_task }}">↓</a>
-                                <a class="btn btn-primary" href="/move/NextWeek/{{ todo.id_task }}">↓↓</a>
-                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                            </td>
+                    {% else %}
 
-                    {% elif ((todo.when == 'Today') and (todo.complete == True)) %}
-                        <tr class="table-success">
+                            <tr class="table-success">
+
                             <td><del>{{ todo.title }}</del></td>
                             <td><span class="badge bg-success">Done!</span></td>
 
+                    {% endif%}
+
                             <td>
                                 <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
                                 <a class="btn btn-primary" href="/move/ThisWeek/{{ todo.id_task }}">↓</a>
@@ -74,7 +73,7 @@
                                 <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
                             </td>
 
-                    {% endif%}
+                    {% endif %}
 
                         </tr>
 
@@ -87,7 +86,7 @@
 
     <br>
 
-    <!Tasks for this week!>
+    <!Table: Tasks for this week!>
     <div class="row justify-content-center">
         <div class="col">
 
@@ -103,23 +102,21 @@
                 <tbody>
                 {% for todo in todo_list %}
 
-                    <!Tasks for this week!>
-                    {% if ((todo.when == 'ThisWeek') and (todo.complete == False)) %}
+                    {% if todo.when == 'ThisWeek' %}
+                        {% if todo.complete == False %}
                         <tr class="table-light">
+
                             <td>{{ todo.title }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
 
-                            <td>
-                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                                <a class="btn btn-primary" href="/move/Today/{{ todo.id_task }}">↑</a>
-                                <a class="btn btn-primary" href="/move/NextWeek/{{ todo.id_task }}">↓</a>
-                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                            </td>
+                    {% else %}
 
-                    {% elif ((todo.when == 'ThisWeek') and (todo.complete == True)) %}
-                        <tr class="table-success">
+                            <tr class="table-success">
+
                             <td><del>{{ todo.title }}</del></td>
                             <td><span class="badge bg-success">Done!</span></td>
+
+                    {% endif %}
 
                             <td>
                                 <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
@@ -141,7 +138,7 @@
 
     <br>
 
-    <!Tasks for next week!>
+    <!Table: Tasks for next week!>
     <div class="row justify-content-center">
         <div class="col">
 
@@ -157,11 +154,21 @@
                 <tbody>
                 {% for todo in todo_list %}
 
-                    <!Tasks for next week!>
-                    {% if ((todo.when == 'NextWeek') and (todo.complete == False)) %}
+                    {% if todo.when == 'NextWeek' %}
+                        {% if todo.complete == False %}
                         <tr class="table-light">
+
                             <td>{{ todo.title }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
+
+                    {% else %}
+
+                            <tr class="table-success">
+
+                            <td><del>{{ todo.title }}</del></td>
+                            <td><span class="badge bg-success">Done!</span></td>
+
+                    {% endif %}
 
                             <td>
                                 <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
@@ -169,18 +176,6 @@
                                 <a class="btn btn-primary" href="/move/Today/{{ todo.id_task }}">↑↑</a>
                                 <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
                             </td>
-
-                    {% elif ((todo.when == 'NextWeek') and (todo.complete == True)) %}
-                        <tr class="table-success">
-                        <td><del>{{ todo.title }}</del></td>
-                        <td><span class="badge bg-success">Done!</span></td>
-
-                        <td>
-                            <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                            <a class="btn btn-primary" href="/move/ThisWeek/{{ todo.id_task }}">↑</a>
-                            <a class="btn btn-primary" href="/move/Today/{{ todo.id_task }}">↑↑</a>
-                            <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                        </td>
 
                     {% endif %}
 
