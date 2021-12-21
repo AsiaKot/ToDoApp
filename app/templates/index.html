@@ -21,8 +21,12 @@
     <!Adding new task!>
     <form action="/add" method="POST">
         <div class="row align-items-center">
-            <div class="col-6">
+            <div class="col-4">
                 <input class="form-control" name="title" placeholder="Enter a new task" type="text">
+            </div>
+            <div class="col-2">
+                <input class="form-control" name="priority" placeholder="Priority from 1-10" type="number"
+                       min="1" max="10" required>
             </div>
             <div class="col-1">
                 <button class="btn btn-primary" type="submit">Add</button>
@@ -41,6 +45,7 @@
                 <thead>
                 <tr class="table-warning">
                     <th scope="col">Tasks to do today</th>
+                    <th scope="col">Priority</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -55,6 +60,7 @@
                         <tr class="table-warning">
 
                             <td>{{ todo.title }}</td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
 
                     {% else %}
@@ -62,6 +68,7 @@
                             <tr class="table-success">
 
                             <td><del>{{ todo.title }}</del></td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-success">Done!</span></td>
 
                     {% endif%}
@@ -94,6 +101,7 @@
                 <thead>
                 <tr class="table-light">
                     <th scope="col">Tasks to do this week</th>
+                    <th scope="col">Priority</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -107,6 +115,7 @@
                         <tr class="table-light">
 
                             <td>{{ todo.title }}</td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
 
                     {% else %}
@@ -114,6 +123,7 @@
                             <tr class="table-success">
 
                             <td><del>{{ todo.title }}</del></td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-success">Done!</span></td>
 
                     {% endif %}
@@ -146,6 +156,7 @@
                 <thead>
                 <tr class="table-light">
                     <th scope="col">Tasks to do next week</th>
+                    <th scope="col">Priority</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -159,6 +170,7 @@
                         <tr class="table-light">
 
                             <td>{{ todo.title }}</td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-warning text-dark">To do</span></td>
 
                     {% else %}
@@ -166,6 +178,7 @@
                             <tr class="table-success">
 
                             <td><del>{{ todo.title }}</del></td>
+                            <td>{{ todo.priority }}</td>
                             <td><span class="badge bg-success">Done!</span></td>
 
                     {% endif %}
