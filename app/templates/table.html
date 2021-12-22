@@ -1,0 +1,90 @@
+<! Table !>
+
+    <div class="row justify-content-center">
+        <div class="col">
+
+            <table class="table">
+                <thead>
+                <tr class="table-secondary">
+                    <th scope="col">Tasks To Do {{ set_when }}</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Move to List:</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+            {% for todo in todo_list|sort(reverse=true, attribute='priority') %}
+
+                {% if todo.when == set_when %}
+
+                    {% if todo.complete == False %}
+
+                        <tr class="table-light">
+
+                        <! Task to do / Priority !>
+                            {% if todo.priority >= 8 %}
+                                <td><strong>{{ todo.title }}</strong></td>
+                                <td><strong>{{ todo.priority }}</strong></td>
+                            {% else %}
+                                <td>{{ todo.title }}</td>
+                                <td>{{ todo.priority }}</td>
+                            {% endif %}
+                            <td><span class="badge bg-warning text-dark">To do</span></td>
+
+                    {% else %}
+
+                        <tr class="table-success">
+
+                            <td><del>{{ todo.title }}</del></td>
+                            <td><del>{{ todo.priority }}</del></td>
+                            <td><span class="badge bg-success">Done!</span></td>
+
+                    {% endif %}
+
+                            <! Move to List !>
+                            {% if set_when == 'Today' %}
+                            <td>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/ThisWeek/{{ todo.id_task }}">ThisWeek</a>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/NextWeek/{{ todo.id_task }}">NextWeek</a>
+                            </td>
+
+
+                            {% elif set_when == 'ThisWeek' %}
+                            <td>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/Today/{{ todo.id_task }}">Today</a>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/NextWeek/{{ todo.id_task }}">NextWeek</a>
+                            </td>
+
+                            {% elif set_when == 'NextWeek' %}
+                            <td>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/Today/{{ todo.id_task }}">Today</a>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="/move/ThisWeek/{{ todo.id_task }}">ThisWeek</a>
+                            </td>
+                            {% endif %}
+
+
+                            <! Actions !>
+                            <td>
+                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
+                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
+                            </td>
+
+                {% endif %}
+
+                        </tr>
+
+            {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
