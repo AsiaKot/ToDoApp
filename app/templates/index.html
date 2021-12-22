@@ -8,17 +8,19 @@
     <meta charset="UTF-8">
     <title>To Do List</title>
 </head>
-<body>
-<br>
-<div class="container">
-    <div class="row justify-content-start">
-        <div class="col">
-            <h2><strong>To-Do List</strong></h2>
-            <br>
-        </div>
-    </div>
 
-    <!Adding new task!>
+<br>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col">
+                <h2><strong>To-Do List</strong></h2>
+                <br>
+            </div>
+        </div>
+
+    <!Adding a new task!>
     <form action="/add" method="POST">
         <div class="row align-items-center">
             <div class="col-4">
@@ -28,177 +30,30 @@
                 <input class="form-control" name="priority" placeholder="Priority from 1-10" type="number"
                        min="1" max="10" required>
             </div>
-            <div class="col-1">
-                <button class="btn btn-primary" type="submit">Add</button>
+            <div class="col-3">
+                <button class="btn btn-primary" type="submit">Add a new task</button>
             </div>
-            <div class="col-5"></div>
+            <div class="col-3"></div>
         </div>
     </form>
 
     <br>
 
     <!Table: Tasks for today!>
-    <div class="row justify-content-center">
-        <div class="col">
-
-            <table class="table">
-                <thead>
-                <tr class="table-warning">
-                    <th scope="col">Tasks to do today</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for todo in todo_list %}
-
-                {% if todo.when == 'Today' %}
-                    {% if todo.complete == False %}
-
-                        <tr class="table-warning">
-
-                            <td>{{ todo.title }}</td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-warning text-dark">To do</span></td>
-
-                    {% else %}
-
-                            <tr class="table-success">
-
-                            <td><del>{{ todo.title }}</del></td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-success">Done!</span></td>
-
-                    {% endif%}
-
-                            <td>
-                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                                <a class="btn btn-primary" href="/move/ThisWeek/{{ todo.id_task }}">↓</a>
-                                <a class="btn btn-primary" href="/move/NextWeek/{{ todo.id_task }}">↓↓</a>
-                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                            </td>
-
-                    {% endif %}
-
-                        </tr>
-
-                {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+        {% set set_when = 'Today' %}
+            {% include "table.html" %}
 
     <br>
 
     <!Table: Tasks for this week!>
-    <div class="row justify-content-center">
-        <div class="col">
-
-            <table class="table">
-                <thead>
-                <tr class="table-light">
-                    <th scope="col">Tasks to do this week</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for todo in todo_list %}
-
-                    {% if todo.when == 'ThisWeek' %}
-                        {% if todo.complete == False %}
-                        <tr class="table-light">
-
-                            <td>{{ todo.title }}</td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-warning text-dark">To do</span></td>
-
-                    {% else %}
-
-                            <tr class="table-success">
-
-                            <td><del>{{ todo.title }}</del></td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-success">Done!</span></td>
-
-                    {% endif %}
-
-                            <td>
-                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                                <a class="btn btn-primary" href="/move/Today/{{ todo.id_task }}">↑</a>
-                                <a class="btn btn-primary" href="/move/NextWeek/{{ todo.id_task }}">↓</a>
-                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                            </td>
-
-                    {% endif %}
-
-                        </tr>
-
-                {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+        {% set set_when = 'ThisWeek' %}
+            {% include "table.html" %}
 
     <br>
 
     <!Table: Tasks for next week!>
-    <div class="row justify-content-center">
-        <div class="col">
+        {% set set_when = 'NextWeek' %}
+            {% include "table.html" %}
 
-            <table class="table">
-                <thead>
-                <tr class="table-light">
-                    <th scope="col">Tasks to do next week</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for todo in todo_list %}
-
-                    {% if todo.when == 'NextWeek' %}
-                        {% if todo.complete == False %}
-                        <tr class="table-light">
-
-                            <td>{{ todo.title }}</td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-warning text-dark">To do</span></td>
-
-                    {% else %}
-
-                            <tr class="table-success">
-
-                            <td><del>{{ todo.title }}</del></td>
-                            <td>{{ todo.priority }}</td>
-                            <td><span class="badge bg-success">Done!</span></td>
-
-                    {% endif %}
-
-                            <td>
-                                <a class="btn btn-success" href="/update/{{ todo.id_task }}">✓</a>
-                                <a class="btn btn-primary" href="/move/ThisWeek/{{ todo.id_task }}">↑</a>
-                                <a class="btn btn-primary" href="/move/Today/{{ todo.id_task }}">↑↑</a>
-                                <a class="btn btn-danger" href="/delete/{{ todo.id_task }}">✗</a>
-                            </td>
-
-                    {% endif %}
-
-                        </tr>
-
-                {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
-    </div>
 </body>
 </html>
