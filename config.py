@@ -1,3 +1,4 @@
+import psycopg2
 from dataclasses import dataclass
 from string import ascii_letters
 from random import sample
@@ -7,5 +8,5 @@ from random import sample
 class Config:
     DEBUG: bool = True
     SECRET_KEY: str = "".join(sample(ascii_letters, 10))
-    SQLALCHEMY_DATABASE_URI: str = "sqlite:///db1.sqlite"
+    SQLALCHEMY_DATABASE_URI: str = "postgresql+psycopg2://postgres:postgres@db:5432/todo-db"
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
