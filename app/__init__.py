@@ -4,6 +4,11 @@ from app.db import DB
 
 
 def create_app() -> Flask:
+    """
+    Creates Flask app.
+    :return: app
+    :rtype: Flask
+    """
     app = Flask(__name__)
     app.config.from_object("config.Config")
 
