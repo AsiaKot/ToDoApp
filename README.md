@@ -1,25 +1,33 @@
-# ToDoApp
+# To-Do List
 
 [![Build Status](https://app.travis-ci.com/AsiaKot/ToDoApp.svg?branch=master)](https://app.travis-ci.com/github/AsiaKot/ToDoApp)
-# Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Application view](#application-view)
 
-## General info
-<details>
-    <summary>Click here to see general information about application!</summary>
-        <br>
-</details>
+## Description
+<b>To-Do List</b> is a simple and intuitive task management tool, that allows you to create individual To-Do lists. The app helps you stay organized and manage your day-to-day tasks by listing everything that has to be done. It allows you to assign planned tasks to 3 To-Do lists: Today, This Week and Next Week, with the most important tasks at the top of the list, and the least important tasks at the bottom. 
 
-## Technologies
-<details>
-    <summary>Click here to see the technologies used!</summary>
-        <ul>
-	      <li></li>
-        </ul>
-</details>
+## Technologies and Frameworks
+
+* Python 3+
+* Flask
+* flask-sqlalchemy
+* HTML
+* Jinja
+* Docker
+* docker-compose
+* Travis CI
+
+## How to Install and Run the Project
+
+Paste this code into your terminal : 
+
+```
+git clone https://github.com/AsiaKot/to-do-app.git
+docker-compose up --build
+```
+
+The app will be available on: http://127.0.0.1:5000/
 
 ## Application view
 
-![screenshot_todoapp](https://user-images.githubusercontent.com/86662368/147961328-1f54c80f-a033-47f4-8c1c-b71630fbd8f0.JPG)
+
+![todolist](https://user-images.githubusercontent.com/86662368/154766512-ec08384d-57d5-4cc2-ba9b-7788ec14506d.png)
